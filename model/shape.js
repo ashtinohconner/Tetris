@@ -8,20 +8,21 @@ class Shape
 {
 	constructor(pivot, color, squares, rotation)
 	{
-		this.pivot = Point(0, 0)
+		//this.pivot = Point(0, 0)
 		this.color = color				// ......
 		this.rotation = rotation	//	
-		this.point0 = Point(0, 0)
-		this.point1 = Point(0, 0)
-		this.point2 = Point(0, 0)
-		this.point3 = Point(0, 0)
-		this.points[0] = this.point0
-		this.points[1] = this.point1
-		this.points[2] = this.point2
-		this.points[3] = this.point3
+		this.type = 0	//	type as in different type of shape(e.g. line vs l1)
+		this.positions = 0	// 3d array of all possible positions a given shape can be in at any given time
+		// this.point0 = Point(0, 0)
+		// this.point1 = Point(0, 0)
+		// this.point2 = Point(0, 0)
+		// this.point3 = Point(0, 0)
+		// this.points[0] = this.point0
+		// this.points[1] = this.point1
+		// this.points[2] = this.point2
+		// this.points[3] = this.point3
 	}
 	
-
 	//	TODO: need to consider left edge in subclasses
 	moveLeft()
 	{
