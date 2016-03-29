@@ -6,13 +6,12 @@
 
 class Shape 
 {
-	constructor(pivot, color, squares, rotation)
+	constructor(type, color)
 	{
 		//this.pivot = Point(0, 0)
+		this.type = type	//	type as in different type of shape(e.g. line vs l1)
 		this.color = color				// ......
-		this.rotation = rotation	//	
-		this.type = 0	//	type as in different type of shape(e.g. line vs l1)
-		this.positions = 0	// 3d array of all possible positions a given shape can be in at any given time
+			// 3d array of all possible positions a given shape can be in at any given time
 		// this.point0 = Point(0, 0)
 		// this.point1 = Point(0, 0)
 		// this.point2 = Point(0, 0)
