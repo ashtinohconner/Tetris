@@ -28,7 +28,7 @@ class Field
 			temp_field[pos_tfr] = [0,0,0,0,0,0,0,0,0,0]
 		}	
 
-		pos_tfr = 1	// new field will copy the 0 row from this.rows into its second([1]) row.
+		pos_tfr = 1	// new field("temp_field") will copy the 0 row from this.rows into its second([1]) row.
 
 		for(; pos_tfr < 10; pos_tfr++)
 		{
