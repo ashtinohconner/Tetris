@@ -8,8 +8,8 @@ class Line extends Shape
 {
 	constructor(rotation)
 	{
-		super(0, red)		//......
-		this.rotation = rotation	//	
+		super(0, red)
+		this.rotation = rotation	
 		this.positions = [
 				[
 					[0,0,1,0],
