@@ -9,7 +9,7 @@ class Zag1 extends Shape
 	constructor(rotation)
 	{
 		super(5, orange)		//......
-		this.rotation = rotation	//	
+		this.rotation = rotation % 2
 		this.positions = [
 				[
 					[1,0,0],

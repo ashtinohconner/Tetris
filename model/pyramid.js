@@ -9,7 +9,7 @@ class Pyramid extends Shape
 	constructor(rotation)
 	{
 		super(2, yellow)		//......
-		this.rotation = rotation	//	
+		this.rotation = rotation % 4
 		this.positions = [
 				[
 					[0, 0, 1],

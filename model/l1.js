@@ -9,7 +9,7 @@ class L1 extends Shape
 	constructor(rotation)
 	{
 		super(3, green)		//......
-		this.rotation = rotation	//	
+		this.rotation = rotation % 4	//	
 		this.positions = [
 				[
 					[1,0,0],
