@@ -40,4 +40,38 @@ class Field
 
 		this.rows = temp_field	// this assumes we are copying by value and not reference...
 	}
+
+	newRandShape()
+	{
+		 var rand_type = Math.floor((Math.random() * 7) + 1) - 1	//	0 - 6
+
+		 if(rand_type == 0)
+		 {
+
+		 }
+		 else if(rand_type == 1)
+		 {
+
+		 }
+		 else if(rand_type == 2)
+		 {
+		 	
+		 }
+		 else if(rand_type == 3)
+		 {
+		 	
+		 }
+		 else if(rand_type == 4)
+		 {
+		 	
+		 }
+		 else if(rand_type == 5)
+		 {
+		 	
+		 }
+		 else
+		 {
+		 	
+		 }
+	}
 }

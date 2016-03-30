@@ -8,7 +8,7 @@ class Zag2 extends Zag1
 {
 	constructor(rotation)
 	{
-		super(5, orange)		//......
+		super(6, orange)		//......
 		this.rotation = rotation % 2
 		this.positions = [
 				[
