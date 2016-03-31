@@ -21,22 +21,87 @@ var color_array = [0xff0000, 0x00ff00, 0x0000ff];
 var color_index = 0;
 class Piece {
     constructor(container, i, j) {
-        if (color_index % 2 == 1) {
+        //if (color_index % 2 == 1) {
             this.values = [
-                [0, 0],
                 [0, 1],
                 [1, 0],
-                [1, 1]
-            ]
-        } 
-        else {
-            this.values = [
-                [0, 0],
-                [0, 1],
                 [1, 1],
-                [1, 2]
+                [0, 2]
             ]
-        }
+
+            // this is a J
+            // this.values = [
+            //     [1, 0],
+            //     [1, 1],
+            //     [1, 2],
+            //     [0, 2]
+            // ]
+
+            // this is an L
+            // this.values = [
+            //     [0, 0],
+            //     [0, 1],
+            //     [1, 2],
+            //     [0, 2]
+            // ]
+
+            // this is a rotated J
+            // this.values = [
+            //     [0, 0],
+            //     [1, 1],
+            //     [0, 1],
+            //     [2, 1]
+            // ]
+
+            // this is a T
+            // this.values = [
+            //     [0, 1],
+            //     [1, 1],
+            //     [1, 0],
+            //     [1, 2]
+            // ]
+
+            // this is a L
+            // this.values = [
+            //     [0, 0],
+            //     [1, 1],
+            //     [1, 0],
+            //     [1, 2]
+            // ]
+
+            // this is a square
+            // this.values = [
+            //     [0, 0],
+            //     [0, 1],
+            //     [1, 0],
+            //     [1, 1]
+            // ]
+
+            // this is a line 
+            // this.values = [
+            //     [0, 2],
+            //     [0, 1],
+            //     [0, 0],
+            //     [0, 3]
+            // ]
+
+            // this is the other zag
+            // this.values = [
+            //     [0, 1],
+            //     [1, 0],
+            //     [1, 1],
+            //     [0, 2]
+            // ]
+        // } 
+        // else {
+        	// this is a zag
+            // this.values = [
+            //     [0, 0],
+            //     [0, 1],
+            //     [1, 1],
+            //     [1, 2]
+            // ]
+        // }
         this.i = 0;
         this.j = 0;
         this.color = color_array[color_index];
@@ -125,6 +190,12 @@ class Tetris {
         this.current_piece = new Piece();
         this.draw_piece();
         document.addEventListener('keydown', this.handle_key_presses.bind(this))
+        window.addEventListener("keydown", function(e) {
+		    // space and arrow keys
+		    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+		        e.preventDefault();
+		    }
+		}, false);
     }
     handle_key_presses(key) {
         if (key.code == "ArrowDown") {
