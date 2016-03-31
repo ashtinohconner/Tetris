@@ -16,143 +16,137 @@
   <div class="c4"> </div>
 
 <script>
-	"use strict";
-var color_array = [0xff0000, 0x00ff00, 0x0000ff];
-var color_index = 0;
-class Piece {
-    constructor(container, i, j) {
-        //if (color_index % 2 == 1) {
+   "use strict";
+     // 7 colors, red, green, blue, yellow, baby blue, orange, purple
+     var color_array = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0x00ffff, 0xff8000, 0xbf00ff];
+     var color_index = 0;
+     class Piece {
+        constructor(container, i, j) {
+        
+        // this is a J
+        if (color_index % 7 == 0) {
+          this.values = [
+          [1, 0],
+          [1, 1],
+          [1, 2],
+          [0, 2]
+          ]
+
+      }
+        //  this is an L
+        else if(color_index % 7 == 1)
+        {
+           this.values = [
+           [0, 0],
+           [0, 1],
+           [1, 2],
+           [0, 2]
+           ]
+       }
+        // this is a T
+        else if(color_index % 7 == 2)
+        {
+           this.values = [
+           [0, 1],
+           [1, 1],
+           [1, 0],
+           [1, 2]
+           ]
+       }
+        // square
+        else if(color_index % 7 == 3)
+        {
+         this.values = [
+         [0, 0],
+         [0, 1],
+         [1, 0],
+         [1, 1]
+         ]
+     }
+        //  line
+        else if(color_index % 7 == 4)
+        {
             this.values = [
-                [0, 1],
-                [1, 0],
-                [1, 1],
-                [0, 2]
+            [0, 2],
+            [0, 1],
+            [0, 0],
+            [0, 3]
             ]
-
-            // this is a J
-            // this.values = [
-            //     [1, 0],
-            //     [1, 1],
-            //     [1, 2],
-            //     [0, 2]
-            // ]
-
-            // this is an L
-            // this.values = [
-            //     [0, 0],
-            //     [0, 1],
-            //     [1, 2],
-            //     [0, 2]
-            // ]
-
-            // this is a rotated J
-            // this.values = [
-            //     [0, 0],
-            //     [1, 1],
-            //     [0, 1],
-            //     [2, 1]
-            // ]
-
-            // this is a T
-            // this.values = [
-            //     [0, 1],
-            //     [1, 1],
-            //     [1, 0],
-            //     [1, 2]
-            // ]
-
-            // this is a L
-            // this.values = [
-            //     [0, 0],
-            //     [1, 1],
-            //     [1, 0],
-            //     [1, 2]
-            // ]
-
-            // this is a square
-            // this.values = [
-            //     [0, 0],
-            //     [0, 1],
-            //     [1, 0],
-            //     [1, 1]
-            // ]
-
-            // this is a line 
-            // this.values = [
-            //     [0, 2],
-            //     [0, 1],
-            //     [0, 0],
-            //     [0, 3]
-            // ]
-
-            // this is the other zag
-            // this.values = [
-            //     [0, 1],
-            //     [1, 0],
-            //     [1, 1],
-            //     [0, 2]
-            // ]
-        // } 
-        // else {
-        	// this is a zag
-            // this.values = [
-            //     [0, 0],
-            //     [0, 1],
-            //     [1, 1],
-            //     [1, 2]
-            // ]
-        // }
-        this.i = 0;
-        this.j = 0;
-        this.color = color_array[color_index];
-        color_index = (color_index + 1) % 3
-    }
-    down() {
-        this.j++
-    }
-    up() {
-        this.j--
-    }
-    left() {
-        this.i--;
-        if (this.i < 0) {
-            this.i = 0
         }
-    }
-    right() {
-        this.i++;
-        if (this.i > 9) {
-            this.i = 9
+        //  zag 1
+        else if(color_index % 7 == 5)
+        {
+            this.values = [
+            [0, 1],
+            [1, 0],
+            [1, 1],
+            [0, 2]
+            ] 
+
         }
+        //  zag 2
+        else 
+        {
+           this.values = [
+           [0, 0],
+           [0, 1],
+           [1, 1],
+           [1, 2]
+           ]
+       }
+
+
+       this.i = 0;
+       this.j = 0;
+       this.color = color_array[color_index];
+       color_index = (color_index + 1) % 7
+   }
+   down() {
+    this.j++
+}
+up() {
+    this.j--
+}
+left() {
+    this.i--;
+    if (this.i < 0) {
+        this.i = 0
     }
-    draw(matrix) {
-        for (var i = 0; i < this.values.length; i++) {
-            var cell = matrix[this.i + this.values[i][0]][this.j + this.values[i][1]];
-            cell.visible = true;
-            cell.color = this.color;
-            cell.draw()
-        }
+}
+right() {
+    this.i++;
+    if (this.i > 9) {
+        this.i = 9
     }
-    fill(matrix) {
-        for (var i = 0; i < this.values.length; i++) {
-            var cell = matrix[this.i + this.values[i][0]][this.j + this.values[i][1]];
-            cell.visible = true;
-            cell.color = this.color;
-            cell.filled = true;
-            cell.draw()
-        }
+}
+draw(matrix) {
+    for (var i = 0; i < this.values.length; i++) {
+        var cell = matrix[this.i + this.values[i][0]][this.j + this.values[i][1]];
+        cell.visible = true;
+        cell.color = this.color;
+        cell.draw()
     }
-    conflict(matrix) {
-        for (var i = 0; i < this.values.length; i++) {
-            var i_offset = this.i + this.values[i][0];
-            var j_offset = this.j + this.values[i][1];
-            if (j_offset >= 20) return true;
-            var cell = matrix[i_offset][j_offset];
-            console.log(cell);
-            if (cell.filled) return true
-        }
-        return false
+}
+fill(matrix) {
+    for (var i = 0; i < this.values.length; i++) {
+        var cell = matrix[this.i + this.values[i][0]][this.j + this.values[i][1]];
+        cell.visible = true;
+        cell.color = this.color;
+        cell.filled = true;
+        cell.draw()
     }
+}
+conflict(matrix) {
+    for (var i = 0; i < this.values.length; i++) {
+        var i_offset = this.i + this.values[i][0];
+        var j_offset = this.j + this.values[i][1];
+        if (j_offset >= 20) return true;
+        var cell = matrix[i_offset][j_offset];
+        console.log(cell);
+        if (cell.filled) return true
+    }
+return false
+}
 }
 class Cell {
     constructor(container, i, j) {
@@ -191,11 +185,20 @@ class Tetris {
         this.draw_piece();
         document.addEventListener('keydown', this.handle_key_presses.bind(this))
         window.addEventListener("keydown", function(e) {
+<<<<<<< HEAD
 		    // space and arrow keys
 		    if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
 		        e.preventDefault();
 		    }
 		}, false);
+=======
+            // space and arrow keys
+            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
+                e.preventDefault();
+            }
+        }, false);
+
+>>>>>>> 753c6dbbe254c55402a2c348b25b481eca727e7c
     }
     handle_key_presses(key) {
         if (key.code == "ArrowDown") {
