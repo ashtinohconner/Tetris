@@ -6,183 +6,230 @@
 
 class Shape 
 {
-	constructor(type, color)
+	//constructor(type, color)
+	constructor(type)
 	{
-		//this.pivot = Point(0, 0)
-		this.type = type	//	type as in different type of shape(e.g. line vs l1)
-		this.color = color				// ......
-			// 3d array of all possible positions a given shape can be in at any given time
-		// this.point0 = Point(0, 0)
-		// this.point1 = Point(0, 0)
-		// this.point2 = Point(0, 0)
-		// this.point3 = Point(0, 0)
-		// this.points[0] = this.point0
-		// this.points[1] = this.point1
-		// this.points[2] = this.point2
-		// this.points[3] = this.point3
+		this.type = type	//	type as in different type of shape(e.g. line vs l1)		
 	}
 	
-	// //	TODO: need to consider left edge in subclasses
-	// moveLeft()
-	// {
-	// 	if(touchingLeftEdge == true)
-	// 	{
-	// 		//.....
-	// 		return
-	// 	}
-	// 	else
-	// 	{
-	// 		this.point0.x--
-	// 		this.point1.x--
-	// 		this.point2.x--
-	// 		this.point3.x--
-	// 		return
-	// 	}
-	// }
+}
 
-	// //	TODO: need to consider right edge in subclasses
-	// moveRight()
-	// {
-	// 	if(touchingRightEdge() == true)
-	// 	{
-	// 		//.....
-	// 		return
-	// 	}
-	// 	else
-	// 	{
-	// 		this.point0.x++
-	// 		this.point1.x++
-	// 		this.point2.x++
-	// 		this.point3.x++
-	// 		return
-	// 	}
-	// }
+class L1 extends Shape
+	{
+		constructor(rotation)
+		{
+		super(0)		
+		this.rotation = rotation % 4
+	
+		this.positions = [
 
-	// //	TODO: need to consider bottom edge in subclasses
-	// moveDown()
-	// {
-	// 	if(touchingBottomEdge())
-	// 	{
-	// 		//.......
-	// 		return
-	// 	}
-	// 	else if(bottomOut())
-	// 	{
-	// 		//....
-	// 		return
-	// 	}
-	// 	else
-	// 	{
-	// 		this.point0.y++
-	// 		this.point1.y++
-	// 		this.point2.y++
-	// 		this.point3.y++
-	// 		return
-	// 	}
-	// }
+			[	// right side up 
+				[0, 0],		//	*
+				[0, 1],		//	*
+				[1, 2],		//	*
+				[0, 2]		//	**
+			],
 
-	// //	TODO: need to decide if the the only time an edge will affect a rotation is if the piece is in direct contact with it.
-	// rotateCounter()
-	// {
-	// 	if(touchingLeftEdge())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	else if(touchingRightEdge())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	else if(touchingBottomEdge())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	else if(bottomOut())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	// else no edge intrusion
-	// 	else
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// }
+			[	// side 2
+               [1, 1],			//   *
+               [2, 1],			// ***
+               [2, 0],
+               [0, 1]
+           	],
 
-	// //	TODO: need to decide if the the only time an edge will affect a rotation is if the piece is in direct contact with it.
-	// rotateClock()
-	// {
-	// 	if(touchingLeftEdge())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	else if(touchingRightEdge())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	else if(touchingBottomEdge())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	else if(bottomOut())
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// 	// else no edge intrusion
-	// 	else
-	// 	{
-	// 		//...
-	// 		return
-	// 	}
-	// }
+			[	// upside down
+				[0, 0],
+				[1, 1],
+				[1, 0],
+				[1, 2]
+			],
 
-	// touchingLeftEdge()		
-	// {
-	// 	for(pos_le = 0; pos_le < 3; pos_le++)
-	// 	{
-	// 		if(points[pos_le].x == 0)
-	// 		{
-	// 			return true
-	// 		}
-	// 	}
+			[	// side 1
+               [0, 0],
+               [0, 1],
+               [1, 0],
+               [2, 0]
+           ]
+		]
+	}
+}
 
-	// 	return false
-	// }
+//*********
 
-	// touchingRightEdge()		
-	// {
-	// 	for(pos_re = 0; pos_re < 3; pos_re++)
-	// 	{
-	// 		if(points[pos_re].x == 9)
-	// 		{
-	// 			return true
-	// 		}
-	// 	}
+//	L2 is actually A J!!
+class L2 extends L1
+{
+	constructor(rotation)
+	{
+		super(1)
+		this.rotation = rotation % 4	
+		
+		this.positions = [
+			[
+          		[1, 0],
+          		[1, 1],
+          		[1, 2],
+          		[0, 2]
+          	],
 
-	// 	return false
-	// }
+          	[	
+          		[0, 0],
+               	[2, 1],
+               	[1, 0],
+               	[2, 0]
+          	],
 
-	// touchingBottomEdge()		
-	// {
-	// 	for(pos_be = 0; pos_be < 3; pos_be++)
-	// 	{
-	// 		if(points[pos_be].y == 19)
-	// 		{
-	// 			return true
-	// 		}
-	// 	}
+          	//	upside down
+          	[
+          		[0, 1],
+               	[1, 0],
+               	[0, 2],
+               	[0, 0]
+          	],
 
-	// 	return false	
-	// }
+          	[
+                [0, 0],
+                [2, 1],
+                [1, 1],
+                [0, 1]
+            ]
+		]
+	}
+}
 
-	// //	return true/false
-	// bottomOut()				// ??
-	// {}
+// ******* T
+class Pyramid extends Shape
+{
+	constructor(rotation)
+	{
+		super(2)		//......
+		this.rotation = rotation % 4
+
+		this.positions = [
+			[
+				[0, 1],
+               	[2, 1],
+               	[1, 0],
+               	[1, 1]
+			],
+
+			[
+				[0, 1],
+           		[1, 1],
+           		[1, 0],
+           		[1, 2]
+			],
+
+			[
+				[0, 0],
+               	[1, 1],
+               	[1, 0],
+               	[2, 0]
+			],
+
+			[
+				[0, 1],
+               	[1, 1],
+               	[0, 0],
+               	[0, 2] 
+            ]
+		]
+	}
+}
+
+// *******	square
+class Square extends Shape
+{
+	constructor()
+	{
+		super(3)		//......
+
+		this.positions = [
+			[
+                [0, 0],
+                [0, 1],
+                [1, 0],
+                [1, 1]
+            ]
+        ]    
+	}
+}
+
+// ******	line
+class Line extends Shape
+{
+	constructor(rotation)
+	{
+		super(4)
+		this.rotation = rotation % 2
+
+		this.positions = [
+			[
+                [0, 2],
+                [0, 1],
+                [0, 0],
+                [0, 3]
+            ],
+
+            [
+            	[0, 0],
+            	[2, 0],
+            	[1, 0],
+            	[3, 0]
+            ]
+        ]
+	}
+}
+
+//*******	zag 1
+class Zag1 extends Shape
+{
+	constructor(rotation)
+	{
+		super(5)		//......
+		this.rotation = rotation % 2
+		
+		this.positions = [
+			[
+				[0, 0],
+               	[0, 1],
+               	[1, 1],
+               	[1, 2]
+			],
+
+			[
+				[0, 1],
+               	[2, 0],
+               	[1, 0],
+               	[1, 1]
+			]
+		]
+	}
+}
+
+
+//	******* zag 2
+class Zag2 extends Zag1
+{
+	constructor(rotation)
+	{
+		super(6)		//......
+		this.rotation = rotation % 2
+
+		this.positions = [
+			[
+				[0, 1],
+               	[1, 0],
+               	[1, 1],
+               	[0, 2]
+			],
+
+			[
+				[0, 0],
+               	[2, 1],
+               	[1, 0],
+               	[1, 1]
+			]
+		]
+	}
 }

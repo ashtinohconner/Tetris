@@ -8,6 +8,8 @@
     <!-- THIS FIRST -->
     <script src="jquery-1.11.2.min.js"></script> <!-- 1 - JQUERY -->
     <script src="Pixi/bin/pixi.js"></script>  
+    <script src="model/shape.js"></script>  
+
     
 </head>
 
@@ -20,81 +22,60 @@
      // 7 colors, red, green, blue, yellow, baby blue, orange, purple
      var color_array = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0x00ffff, 0xff8000, 0xbf00ff];
      var color_index = 0;
+     var rotation_index = 0;
      class Piece {
         constructor(container, i, j) {
 
         color_index = Math.floor((Math.random() * 7) + 1) - 1
-        
+        rotation_index = Math.floor((Math.random() * 4) + 1) - 1
+
         // this is a L
         if (color_index % 7 == 0) {
-          
-          this.values = [
-           [0, 0],
-           [0, 1],
-           [1, 2],
-           [0, 2]
-           ]
+
+          var L = new L1(rotation_index)
+
+          this.values = L.positions[L.rotation]
       }
         //  this is an J
         else if(color_index % 7 == 1)
         {
-           this.values = [
-          [1, 0],
-          [1, 1],
-          [1, 2],
-          [0, 2]
-          ]
+            var J = new L2(rotation_index)
+
+            this.values = J.positions[J.rotation]
        }
         // this is a T
         else if(color_index % 7 == 2)
         {
-           this.values = [
-           [0, 1],
-           [1, 1],
-           [1, 0],
-           [1, 2]
-           ]
+            var T = new Pyramid(rotation_index)
+
+            this.values = T.positions[T.rotation]
        }
         // square
         else if(color_index % 7 == 3)
         {
-         this.values = [
-         [0, 0],
-         [0, 1],
-         [1, 0],
-         [1, 1]
-         ]
-     }
+            var square = new Square()
+
+            this.values = square.positions[0]
+        }
         //  line
         else if(color_index % 7 == 4)
         {
-            this.values = [
-            [0, 2],
-            [0, 1],
-            [0, 0],
-            [0, 3]
-            ]
+            var line = new Line(rotation_index)
+
+            this.values = line.positions[line.rotation]
         }
         //  zag 1
         else if(color_index % 7 == 5)
         {
-            this.values = [
-            [0, 1],
-            [1, 0],
-            [1, 1],
-            [0, 2]
-            ] 
+            var z1 = new Zag1(rotation_index)
 
+            this.values = z1.positions[z1.rotation]
         }
         //  zag 2
-        else 
-        {
-           this.values = [
-           [0, 0],
-           [0, 1],
-           [1, 1],
-           [1, 2]
-           ]
+        else {
+            var z2 = new Zag2(rotation_index)
+
+            this.values = z2.positions[z2.rotation]
        }
 
 
