@@ -4,6 +4,7 @@
 	3/28/2016
 */
 
+//	L2 is actually A J!!
 class L2 extends L1
 {
 	constructor(rotation)
