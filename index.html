@@ -190,12 +190,6 @@ class Tetris {
 		        e.preventDefault();
 		    }
 		}, false);
-            // space and arrow keys
-            if([32, 37, 38, 39, 40].indexOf(e.keyCode) > -1) {
-                e.preventDefault();
-            }
-        }, false);
-
     }
     handle_key_presses(key) {
         if (key.code == "ArrowDown") {
