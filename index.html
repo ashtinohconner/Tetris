@@ -3,7 +3,7 @@
 <head>
     <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
     <meta content="utf-8" http-equiv="encoding"/>
-    <title>Tetris Example </title>
+    <title>Tetris</title>
     
     <!-- THIS FIRST -->
     <script src="jquery-1.11.2.min.js"></script> <!-- 1 - JQUERY -->
@@ -38,32 +38,33 @@
      var z2_rotation_index = 0;
 
 
-     class Piece {
+class Piece {
         constructor(container, i, j) {
 
         color_index = Math.floor((Math.random() * 7) + 1) - 1
         rotation_index = Math.floor((Math.random() * 4) + 1) - 1
+        //this.setTimeout(down(), 1000);
 
         // this is a L
         if (color_index % 7 == 0) {
             L_rotation_index = rotation_index
             L = new L1(L_rotation_index)
           this.values = L.positions[L.rotation]
-      }
+        }
         //  this is an J
         else if(color_index % 7 == 1)
         {
             J_rotation_index = rotation_index
             J = new L2(J_rotation_index)
             this.values = J.positions[J.rotation]
-       }
+        }
         // this is a T
         else if(color_index % 7 == 2)
         {
             T_rotation_index = rotation_index
             T = new Pyramid(T_rotation_index)
             this.values = T.positions[T.rotation]
-       }
+        }
         // square
         else if(color_index % 7 == 3)
         {
@@ -100,9 +101,11 @@
 down() {
     this.j++
 }
+
 up() {
     this.j--
 }
+
 left() {
     this.i--;
     if (this.i < 0) {
@@ -207,7 +210,6 @@ rotateClock()
             this.values = z2.positions[z2_rotation_index]
         }
     }
-
 }
 
 rotateCounter()
@@ -331,9 +333,9 @@ conflict(matrix) {
     }
 return false
 }
-}
-//  end of piece
 
+}
+//  end of piece class
 
 class Cell {
     constructor(container, i, j) {
@@ -378,7 +380,9 @@ class Tetris {
 		        e.preventDefault();
 		    }
 		}, false);
+        //window.setInterval(this.current_piece.down(), 1000);
     }
+
     handle_key_presses(key) {
         if (key.code == "ArrowDown") {
             this.current_piece.down();
@@ -388,7 +392,6 @@ class Tetris {
                 this.current_piece = new Piece();
                 this.draw_piece()
             }
-
         }
         if (key.code == "ArrowLeft") {
             this.current_piece.left();
@@ -403,12 +406,12 @@ class Tetris {
             }
         }
 
-        // press Z
+        // press Z, rotate counter
         if (key.code == "KeyZ")
         {
             this.current_piece.rotateCounter()
         }
-        //  press x
+        //  press x, rotate clock
         if (key.code == "KeyX")
         {
             this.current_piece.rotateClock()
@@ -450,7 +453,6 @@ class Tetris {
     }
 }
 
-
 var stage;
 var renderer;
 
@@ -473,13 +475,12 @@ function animate() {
 }
 after_load();
 
-
-var timeout = 0;
-function gravity(keydown)
-{
-    clearTimeout(timeout)
-    timeout = setTimeout(function (){onClick(keydown)}, 1000)
-}
+// var timeout = 0;
+// function gravity(keydown)
+// {
+//     clearTimeout(timeout)
+//     timeout = setTimeout(function (){onClick(keydown)}, 1000)
+// }
 </script>
 
 

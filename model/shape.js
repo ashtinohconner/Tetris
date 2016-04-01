@@ -11,7 +11,6 @@ class Shape
 	{
 		this.type = type	//	type as in different type of shape(e.g. line vs l1)		
 	}
-	
 }
 
 class L1 extends Shape
@@ -186,7 +185,7 @@ class Zag1 extends Shape
 {
 	constructor(rotation)
 	{
-		super(5)		//......
+		super(5)		
 		this.rotation = rotation % 2
 		
 		this.positions = [
@@ -207,13 +206,11 @@ class Zag1 extends Shape
 	}
 }
 
-
-//	******* zag 2
 class Zag2 extends Zag1
 {
 	constructor(rotation)
 	{
-		super(6)		//......
+		super(6)
 		this.rotation = rotation % 2
 
 		this.positions = [
