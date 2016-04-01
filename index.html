@@ -9,8 +9,6 @@
     <script src="jquery-1.11.2.min.js"></script> <!-- 1 - JQUERY -->
     <script src="Pixi/bin/pixi.js"></script>  
     <script src="model/shape.js"></script>  
-
-    
 </head>
 
 <body>
@@ -23,6 +21,23 @@
      var color_array = [0xff0000, 0x00ff00, 0x0000ff, 0xffff00, 0x00ffff, 0xff8000, 0xbf00ff];
      var color_index = 0;
      var rotation_index = 0;
+     var block = 0;
+     var L;
+     var J;
+     var T;
+     var square;
+     var line;
+     var z1; 
+     var z2;
+
+     var L_rotation_index = 0;
+     var J_rotation_index = 0;
+     var T_rotation_index = 0;
+     var line_rotation_index = 0;
+     var z1_rotation_index = 0;
+     var z2_rotation_index = 0;
+
+
      class Piece {
         constructor(container, i, j) {
 
@@ -31,60 +46,58 @@
 
         // this is a L
         if (color_index % 7 == 0) {
-
-          var L = new L1(rotation_index)
-
+            L_rotation_index = rotation_index
+            L = new L1(L_rotation_index)
           this.values = L.positions[L.rotation]
       }
         //  this is an J
         else if(color_index % 7 == 1)
         {
-            var J = new L2(rotation_index)
-
+            J_rotation_index = rotation_index
+            J = new L2(J_rotation_index)
             this.values = J.positions[J.rotation]
        }
         // this is a T
         else if(color_index % 7 == 2)
         {
-            var T = new Pyramid(rotation_index)
-
+            T_rotation_index = rotation_index
+            T = new Pyramid(T_rotation_index)
             this.values = T.positions[T.rotation]
        }
         // square
         else if(color_index % 7 == 3)
         {
-            var square = new Square()
-
+            square = new Square()
             this.values = square.positions[0]
         }
         //  line
         else if(color_index % 7 == 4)
         {
-            var line = new Line(rotation_index)
-
+            line_rotation_index = rotation_index % 2
+            line = new Line(line_rotation_index)
             this.values = line.positions[line.rotation]
         }
         //  zag 1
         else if(color_index % 7 == 5)
         {
-            var z1 = new Zag1(rotation_index)
-
+            z1_rotation_index = rotation_index % 2
+            z1 = new Zag1(z1_rotation_index)
             this.values = z1.positions[z1.rotation]
         }
         //  zag 2
-        else {
-            var z2 = new Zag2(rotation_index)
-
+        else 
+        {
+            z2_rotation_index = rotation_index % 2
+            z2 = new Zag2(z2_rotation_index)
             this.values = z2.positions[z2.rotation]
-       }
-
+        }
 
        this.i = 0;
        this.j = 0;
        this.color = color_array[color_index];
-       //color_index = (color_index + 1) % 7
    }
-   down() {
+
+down() {
     this.j++
 }
 up() {
@@ -96,12 +109,197 @@ left() {
         this.i = 0
     }
 }
-right() {
+
+right() 
+{
     this.i++;
     if (this.i > 9) {
         this.i = 9
     }
 }
+
+// our rotators
+rotateClock()
+{
+    // decrement postion in position array
+    // L
+    if(color_index == 0)
+    {
+        if(L_rotation_index == 0)
+        {
+            L_rotation_index = 3
+            this.values = L.positions[L_rotation_index]
+        }
+        else
+        {
+            this.values = L.positions[--L_rotation_index]
+        }
+    }
+
+    // J
+    if(color_index == 1)
+    {
+        if(J_rotation_index == 0)
+        {
+            J_rotation_index = 3
+            this.values = J.positions[J_rotation_index]
+        }
+        else
+        {
+            this.values = J.positions[--J_rotation_index]
+        }
+    }
+
+    //  T
+    if(color_index == 2)
+    {
+        if(T_rotation_index == 0)
+        {
+            T_rotation_index = 3
+            this.values = T.positions[T_rotation_index]
+        }
+        else
+        {
+            this.values = T.positions[--T_rotation_index]
+        }
+    }
+
+    // line
+    if(color_index == 4)
+    {
+        if(line_rotation_index == 0)
+        {
+            line_rotation_index = 1
+            this.values = line.positions[line_rotation_index]
+        }
+        else
+        {
+            this.values = line.positions[--line_rotation_index]
+        }
+    }
+
+    // z1
+    if(color_index == 5)
+    {
+        if(z1_rotation_index == 0)
+        {
+            z1_rotation_index = 1
+            this.values = z1.positions[z1_rotation_index]
+        }
+        else
+        {
+            z1_rotation_index--
+            this.values = z1.positions[z1_rotation_index]
+        }
+    }
+
+    // z2
+    if(color_index == 6)
+    {
+        if(z2_rotation_index == 0)
+        {
+            z2_rotation_index = 1
+            this.values = z2.positions[z2_rotation_index]
+        }
+        else
+        {
+            z2_rotation_index--;
+            this.values = z2.positions[z2_rotation_index]
+        }
+    }
+
+}
+
+rotateCounter()
+{
+    // increment postion in position array
+    // L
+    if(color_index == 0)
+    {
+        if(L_rotation_index == 3)
+        {
+            L_rotation_index = 0
+            this.values = L.positions[L_rotation_index]
+        }
+        else
+        {
+            this.values = L.positions[++L_rotation_index]
+        }
+    }
+
+    // J
+    if(color_index == 1)
+    {
+        if(J_rotation_index == 3)
+        {
+            J_rotation_index = 0
+            this.values = J.positions[J_rotation_index]
+        }
+        else
+        {
+            this.values = J.positions[++J_rotation_index]
+        }
+    }
+
+    //  T
+    if(color_index == 2)
+    {
+        if(T_rotation_index == 3)
+        {
+            T_rotation_index = 0
+            this.values = T.positions[T_rotation_index]
+        }
+        else
+        {
+            this.values = T.positions[++T_rotation_index]
+        }
+    }
+
+    // line
+    if(color_index == 4)
+    {
+        if(line_rotation_index == 1)
+        {
+            line_rotation_index = 0
+            this.values = line.positions[line_rotation_index]
+        }
+        else
+        {
+            this.values = line.positions[++line_rotation_index]
+        }
+    }
+
+    // z1
+    if(color_index == 5)
+    {
+        if(z1_rotation_index == 1)
+        {
+            z1_rotation_index = 0
+            this.values = z1.positions[z1_rotation_index]
+        }
+        else
+        {
+            z1_rotation_index++
+            this.values = z1.positions[z1_rotation_index]
+        }
+    }
+
+    // z2
+    if(color_index == 6)
+    {
+        if(z2_rotation_index == 1)
+        {
+            z2_rotation_index = 0
+            this.values = z2.positions[z2_rotation_index]
+        }
+        else
+        {
+            z2_rotation_index++;
+            this.values = z2.positions[z2_rotation_index]
+        }
+    }
+}
+
 draw(matrix) {
     for (var i = 0; i < this.values.length; i++) {
         var cell = matrix[this.i + this.values[i][0]][this.j + this.values[i][1]];
@@ -123,7 +321,10 @@ conflict(matrix) {
     for (var i = 0; i < this.values.length; i++) {
         var i_offset = this.i + this.values[i][0];
         var j_offset = this.j + this.values[i][1];
-        if (j_offset >= 20) return true;
+        if (j_offset >= 20) 
+        {
+            return true;
+        }
         var cell = matrix[i_offset][j_offset];
         console.log(cell);
         if (cell.filled) return true
@@ -131,6 +332,9 @@ conflict(matrix) {
 return false
 }
 }
+//  end of piece
+
+
 class Cell {
     constructor(container, i, j) {
         this.square = new PIXI.Graphics();
@@ -153,6 +357,7 @@ class Cell {
         this.square.visible = value
     }
 }
+
 class Tetris {
     constructor(stage) {
         console.log("constructor for tetris");
@@ -183,6 +388,7 @@ class Tetris {
                 this.current_piece = new Piece();
                 this.draw_piece()
             }
+
         }
         if (key.code == "ArrowLeft") {
             this.current_piece.left();
@@ -195,6 +401,17 @@ class Tetris {
             if (this.current_piece.conflict(this.board_matrix)) {
                 this.current_piece.left()
             }
+        }
+
+        // press Z
+        if (key.code == "KeyZ")
+        {
+            this.current_piece.rotateCounter()
+        }
+        //  press x
+        if (key.code == "KeyX")
+        {
+            this.current_piece.rotateClock()
         }
         this.clear_board();
         this.draw_piece()
@@ -232,6 +449,8 @@ class Tetris {
         this.outline.endFill()
     }
 }
+
+
 var stage;
 var renderer;
 
@@ -255,4 +474,12 @@ function animate() {
 after_load();
 
 
+var timeout = 0;
+function gravity(keydown)
+{
+    clearTimeout(timeout)
+    timeout = setTimeout(function (){onClick(keydown)}, 1000)
+}
 </script>
+
+
